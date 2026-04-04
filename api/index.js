@@ -9,11 +9,7 @@ const cors = require("cors");
 
 
 const app = express();
-app.use(cors({
-  origin: ["https://vercel.app"],
-  methods: ["POST", "GET"],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 const jwtSecret = process.env.JWT_SECRET || "fallbacksecret";
@@ -40,7 +36,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password)
@@ -62,7 +58,7 @@ app.post("/register", async (req, res) => {
 });
 
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password)
@@ -100,7 +96,7 @@ const verifyToken = (req, res, next) => {
 };
 
 
-app.get("/dashboard", verifyToken, (req, res) => {
+app.get("/api/dashboard", verifyToken, (req, res) => {
   res.json({ message: "Welcome UserId: " + req.userId });
 });
 

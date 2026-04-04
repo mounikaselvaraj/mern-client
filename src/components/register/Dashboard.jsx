@@ -16,7 +16,7 @@ function Dashboard() {
     }
 
     axios
-      .get("http://localhost:5000/dashboard", {
+      .get("/api/dashboard", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -25,7 +25,7 @@ function Dashboard() {
         setMsg(res.data.message);
       })
       .catch(() => {
-        // token invalid → logout user
+        
         localStorage.clear();
         navigate("/");
       });

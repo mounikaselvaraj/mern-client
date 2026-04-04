@@ -13,12 +13,12 @@ function Login({ isOpen, onClose, switchToRegister }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/login", data);
+      const res = await axios.post("/api/login", data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       
-      window.dispatchEvent(new Event("userChanged")); // Notify Navbar/Avatar
-      onClose(); // Close pop-up
+      window.dispatchEvent(new Event("userChanged")); 
+      onClose();
       navigate("/dashboard");
     } catch (err) {
       alert("Login Failed");

@@ -11,7 +11,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/register", data);
+      await axios.post("/api/register", data);
       alert("Registered successfully!");
       switchToLogin(); 
     } catch (err) {
@@ -36,7 +36,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
   );
 }
 
-// Shared Styles
+
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 };
 const modalCard = { background: 'white', padding: '2rem', borderRadius: '8px', position: 'relative', width: '300px', textAlign: 'center' };
 const closeBtn = { position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '20px', cursor: 'pointer' };

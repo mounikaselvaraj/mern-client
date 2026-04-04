@@ -9,7 +9,11 @@ const cors = require("cors");
 const serverless = require("serverless-http");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ["https://vercel.app"],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
 app.use(express.json());
 
 const jwtSecret = process.env.JWT_SECRET || "fallbacksecret";
@@ -110,5 +114,5 @@ console.log("MONGO_URI:", process.env.MONGO_URI);
 // });
 
 module.exports = app;
-module.exports.handler = serverless(app);
+
 

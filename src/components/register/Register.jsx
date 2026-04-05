@@ -11,7 +11,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/register", data);
+      await axios.post("/register", data);
       alert("Registered successfully!");
       switchToLogin(); 
     } catch (err) {

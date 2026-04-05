@@ -10,8 +10,10 @@
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+      console.log("clicked register");
       try {
         await axios.post("/api/register", data);
+        console.log(data);
         alert("Registered successfully!");
         switchToLogin(); 
       } catch (err) {

@@ -15,7 +15,7 @@ function Dashboard() {
     }
 
     axios
-      .get("/api/dashboard", {   
+      .get(" https://mern-client-1-47da.onrender.com/api/dashboard", {   
         headers: {
           Authorization: `Bearer ${token}`,
         },

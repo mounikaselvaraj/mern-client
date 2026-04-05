@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import api from "../../../api";
+
 
 function Login({ isOpen, onClose, switchToRegister }) {
-   const API = "https://mounikaselvaraj-mern-client.vercel.app";
+  
   const [data, setData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ function Login({ isOpen, onClose, switchToRegister }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post(`${API}/api/login`, data);
+      const res = await axios.post(" https://mern-client-1-47da.onrender.com/api/login", data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       
@@ -35,7 +35,7 @@ function Login({ isOpen, onClose, switchToRegister }) {
         <h2>Login</h2>
 <form
   onSubmit={handleSubmit}
-  className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-8 space-y-5 mt-6"
+  className="max-w-full mx-auto bg-white shadow-lg rounded-2xl p-8 space-y-5 mt-6"
 >
   <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>
 

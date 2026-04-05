@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
   res.send("Backend running ");
 });
 
-app.post("/api/register", async (req, res) => {
+app.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -79,7 +79,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -124,7 +124,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-app.get("/api/dashboard", verifyToken, (req, res) => {
+app.get("/dashboard", verifyToken, (req, res) => {
   res.json({ message: "Welcome UserId: " + req.userId });
 });
 

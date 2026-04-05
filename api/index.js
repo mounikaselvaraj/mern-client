@@ -47,11 +47,11 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Backend running ");
 });
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   try {
      await connectDB();
     const { username, email, password } = req.body;
@@ -77,7 +77,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   try {
      await connectDB();
     const { email, password } = req.body;
@@ -124,8 +124,8 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-app.get("/dashboard", verifyToken, (req, res) => {
-   await connectDB();
+app.get("/api/dashboard", verifyToken, (req, res) => {
+   
   res.json({ message: "Welcome UserId: " + req.userId });
 });
 

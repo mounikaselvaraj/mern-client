@@ -16,7 +16,7 @@ function Dashboard() {
     }
 
     axios
-      .get("/api/dashboard", {
+      .get(`${API}/api/dashboard`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

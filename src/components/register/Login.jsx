@@ -13,7 +13,7 @@ function Login({ isOpen, onClose, switchToRegister }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/login", data);
+      const res = await axios.post(`${API}/api/login`, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       

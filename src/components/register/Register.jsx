@@ -1,7 +1,8 @@
   import { useState } from "react";
   import axios from "axios";
-
+ 
   function Register({ isOpen, onClose, switchToLogin }) {
+    const API = "https://mounikaselvaraj-mern-client.vercel.app";
     const [data, setData] = useState({ username: "", email: "", password: "" });
 
     if (!isOpen) return null;
@@ -12,13 +13,15 @@
       e.preventDefault();
       console.log("clicked register");
       try {
-        await axios.post("/api/register", data);
+        await axios.post(`${API}/api/register`, data);
         console.log(data);
         alert("Registered successfully!");
         switchToLogin(); 
-      } catch (err) {
-  console.error(err.response?.data || err.message);
-  alert(err.response?.data?.message || "Registration failed");
+      } 
+      
+      catch (err) {
+  console.log("ERROR:", err.response || err);
+  alert("Registration failed");
 }
     };
 

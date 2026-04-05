@@ -1,8 +1,9 @@
   import { useState } from "react";
   import axios from "axios";
+  import api from "../../../api";
  
   function Register({ isOpen, onClose, switchToLogin }) {
-    const API = "https://mounikaselvaraj-mern-client.vercel.app";
+ 
     const [data, setData] = useState({ username: "", email: "", password: "" });
 
     if (!isOpen) return null;
@@ -13,7 +14,7 @@
       e.preventDefault();
       console.log("clicked register");
       try {
-        await axios.post(`${API}/api/register`, data);
+        await api.post(`${API}/api/register`, data);
         console.log(data);
         alert("Registered successfully!");
         switchToLogin(); 
@@ -30,12 +31,45 @@
         <div style={modalCard}>
           <button onClick={onClose} style={closeBtn}>&times;</button>
           <h2>Register</h2>
-          <form onSubmit={handleSubmit} style={formStyle}>
-            <input name="username" placeholder="Username" onChange={handleChange} required />
-            <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-            <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-            <button type="submit">Register</button>
-          </form>
+<form
+  onSubmit={handleSubmit}
+  className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-8 space-y-5"
+>
+  <h2 className="text-2xl font-bold text-center text-gray-700">Create Account</h2>
+
+  <input
+    name="username"
+    placeholder="Username"
+    onChange={handleChange}
+    required
+    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+  />
+
+  <input
+    name="email"
+    type="email"
+    placeholder="Email"
+    onChange={handleChange}
+    required
+    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+  />
+
+  <input
+    name="password"
+    type="password"
+    placeholder="Password"
+    onChange={handleChange}
+    required
+    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+  />
+
+  <button
+    type="submit"
+    className="w-full bg-amber-400 text-white py-2 rounded-lg hover:bg-amber-500 transition duration-300"
+  >
+    Register
+  </button>
+</form>
           <p>Already have an account? <span onClick={switchToLogin} style={linkStyle}>Login</span></p>
         </div>
       </div>

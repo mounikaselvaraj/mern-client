@@ -4,19 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    
     if (!token) {
       navigate("/");
       return;
     }
 
     axios
-      .get(`${API}/api/dashboard`, {
+      .get("/api/dashboard", {   
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -25,11 +24,10 @@ function Dashboard() {
         setMsg(res.data.message);
       })
       .catch(() => {
-        
         localStorage.clear();
         navigate("/");
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <>

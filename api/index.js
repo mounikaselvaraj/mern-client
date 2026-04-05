@@ -14,7 +14,11 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://mern-client-2-a8lh.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 const jwtSecret = process.env.JWT_SECRET || "fallbacksecret";

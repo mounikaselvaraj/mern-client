@@ -21,8 +21,9 @@ function Login({ isOpen, onClose, switchToRegister }) {
       onClose();
       navigate("/dashboard");
     } catch (err) {
-      alert("Login Failed");
-    }
+  console.error(err.response?.data || err.message);
+  alert(err.response?.data?.message || "Login Failed");
+}
   };
 
   return (

@@ -15,8 +15,9 @@
         alert("Registered successfully!");
         switchToLogin(); 
       } catch (err) {
-        alert("Registration failed");
-      }
+  console.error(err.response?.data || err.message);
+  alert(err.response?.data?.message || "Registration failed");
+}
     };
 
     return (

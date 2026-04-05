@@ -1,12 +1,16 @@
+
 import dns from "node:dns";
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+
+import "dotenv/config"; 
 
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cors from "cors";
-import serverless from "serverless-http";
+
 
 const app = express();
 
@@ -20,19 +24,21 @@ let isConnected = false;
 
 const connectDB = async () => {
   if (isConnected) return;
-
+  console.log("Attempting to connect to MongoDB..."); // Add this
   try {
-    if (!process.env.MONGO_URI) {
-      throw new Error("MONGO_URI missing");
+    const uri = process.env.MONGO_URI;
+    if (!uri) {
+      console.log("Error: MONGO_URI is undefined!"); // Add this
+      return;
     }
-
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(uri);
     isConnected = true;
-    console.log("MongoDB Connected ");
+    console.log("MongoDB Connected successfully!");
   } catch (err) {
-    console.error("MongoDB error:", err);
+    console.error("MongoDB connection error:", err.message);
   }
 };
+
 
 
 
@@ -130,5 +136,10 @@ app.get("/api/dashboard", verifyToken, (req, res) => {
   res.json({ message: "Welcome UserId: " + req.userId });
 });
 
+const Port = process.env.PORT||  5000;
 
-export default serverless(app);
+app.listen(Port, () => {
+    console.log("Port is " + Port);
+     connectDB();
+});
+// export default serverless(app);

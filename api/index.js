@@ -35,10 +35,7 @@ const connectDB = async () => {
 };
 
 
-app.use(async (req, res, next) => {
-  await connectDB();
-  next();
-});
+
 
 
 const userSchema = new mongoose.Schema({
@@ -56,6 +53,7 @@ app.get("/", (req, res) => {
 
 app.post("/register", async (req, res) => {
   try {
+     await connectDB();
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
@@ -81,6 +79,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
+     await connectDB();
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -100,8 +99,9 @@ app.post("/login", async (req, res) => {
       }
     });
 
-  } catch {
-    res.status(500).json({ message: "Server error" });
+  } catch (err){
+    console.log(err);
+    res.status(500).json({ message: err.message });
   }
 });
 
@@ -125,6 +125,7 @@ const verifyToken = (req, res, next) => {
 };
 
 app.get("/dashboard", verifyToken, (req, res) => {
+   await connectDB();
   res.json({ message: "Welcome UserId: " + req.userId });
 });
 

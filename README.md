@@ -1,4 +1,4 @@
-## MERN Auth App
+## MERN App
 
 ## Live Link
 https://mern-client-2-a8lh.onrender.com
